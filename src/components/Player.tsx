@@ -43,13 +43,13 @@ export function Player({ mobileDirections }: PlayerProps) {
 			else if (goLeft) characterRef.current.rotation.y = -Math.PI / 2;
 			else if (goRight) characterRef.current.rotation.y = Math.PI / 2;
 
-			const cameraOffset = new THREE.Vector3(0, 4, 10);
+			const cameraOffset = new THREE.Vector3(0, 5, 10);
 			const stableTarget = characterRef.current.position.clone();
 			stableTarget.y = 0;
 
 			const targetCameraPosition = stableTarget.clone().add(cameraOffset);
 			state.camera.position.lerp(targetCameraPosition, 0.1);
-			state.camera.lookAt(stableTarget.x, 1.1, stableTarget.z);
+			state.camera.lookAt(stableTarget.x, 3, stableTarget.z);
 		}
 
 		const animSpeed = 12;
