@@ -141,11 +141,11 @@ export function Office() {
 
 			<group position={[0, 7.8, 3]}>
 				<mesh position={[-2, -1.2, -0.2]} castShadow>
-					<boxGeometry args={[0.15, 1.5, 0.15]} />
+					<boxGeometry args={[0.15, 1, 0.15]} />
 					<meshStandardMaterial color="#2d3436" />
 				</mesh>
 				<mesh position={[2, -1.2, -0.2]} castShadow>
-					<boxGeometry args={[0.15, 1.5, 0.15]} />
+					<boxGeometry args={[0.15, 1, 0.15]} />
 					<meshStandardMaterial color="#2d3436" />
 				</mesh>
 
