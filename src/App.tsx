@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { useRef, useState, useEffect } from "react";
 import type { DirectionalLight } from "three";
 import { ControlOverlay } from "./components/ControlOverlay";
-import { MobileControls } from "./components/MobileControls"; // <-- Nouvel import
+import { MobileControls } from "./components/MobileControls";
 import { Environment } from "./components/Environment";
 import { ExperienceSign } from "./components/ExperienceSign";
 import { FutureBuilding } from "./components/FutureBuilding";
@@ -15,7 +15,6 @@ import { SkillsSign } from "./components/SkillsSign";
 function App() {
 	const shadowLightRef = useRef<DirectionalLight>(null);
 
-	// 1. État pour stocker l'activation des touches (haut, bas, gauche, droite)
 	const [directions, setDirections] = useState({
 		up: false,
 		down: false,
@@ -23,10 +22,8 @@ function App() {
 		right: false,
 	});
 
-	// 2. État pour savoir si le visiteur utilise un écran mobile / tactile
 	const [isMobile, setIsMobile] = useState(false);
 
-	// 3. Détection automatique du type d'appareil (au chargement et au redimensionnement)
 	useEffect(() => {
 		const checkDevice = () => {
 			const standardMobileCheck = /Mobi|Android|iPhone|iPad/i.test(
