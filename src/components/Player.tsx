@@ -3,8 +3,17 @@ import { useRef } from "react";
 import * as THREE from "three";
 import { useKeyboard } from "../hooks/useKeyboard";
 
-export function Player() {
-	const { moveForward, moveBackward, moveLeft, moveRight } = useKeyboard();
+interface PlayerProps {
+	mobileDirections: {
+		up: boolean;
+		down: boolean;
+		left: boolean;
+		right: boolean;
+	};
+}
+
+export function Player({ mobileDirections }: PlayerProps) {
+	const keyboard = useKeyboard();
 
 	const characterRef = useRef<THREE.Group>(null);
 	const leftArmRef = useRef<THREE.Group>(null);
@@ -13,31 +22,33 @@ export function Player() {
 	const rightLegRef = useRef<THREE.Group>(null);
 
 	useFrame((state, delta) => {
-		const isMoving = moveForward || moveBackward || moveLeft || moveRight;
+		const goForward = keyboard.moveForward || mobileDirections.up;
+		const goBackward = keyboard.moveBackward || mobileDirections.down;
+		const goLeft = keyboard.moveLeft || mobileDirections.left;
+		const goRight = keyboard.moveRight || mobileDirections.right;
+
+		const isMoving = goForward || goBackward || goLeft || goRight;
 		const time = state.clock.getElapsedTime();
 
 		const moveSpeed = 5 * delta;
 
 		if (characterRef.current) {
-			if (moveForward) characterRef.current.position.z -= moveSpeed;
-			if (moveBackward) characterRef.current.position.z += moveSpeed;
-			if (moveLeft) characterRef.current.position.x -= moveSpeed;
-			if (moveRight) characterRef.current.position.x += moveSpeed;
+			if (goForward) characterRef.current.position.z -= moveSpeed;
+			if (goBackward) characterRef.current.position.z += moveSpeed;
+			if (goLeft) characterRef.current.position.x -= moveSpeed;
+			if (goRight) characterRef.current.position.x += moveSpeed;
 
-			if (moveForward) characterRef.current.rotation.y = Math.PI;
-			else if (moveBackward) characterRef.current.rotation.y = 0;
-			else if (moveLeft) characterRef.current.rotation.y = -Math.PI / 2;
-			else if (moveRight) characterRef.current.rotation.y = Math.PI / 2;
+			if (goForward) characterRef.current.rotation.y = Math.PI;
+			else if (goBackward) characterRef.current.rotation.y = 0;
+			else if (goLeft) characterRef.current.rotation.y = -Math.PI / 2;
+			else if (goRight) characterRef.current.rotation.y = Math.PI / 2;
 
 			const cameraOffset = new THREE.Vector3(0, 4, 10);
-
 			const stableTarget = characterRef.current.position.clone();
 			stableTarget.y = 0;
 
 			const targetCameraPosition = stableTarget.clone().add(cameraOffset);
-
 			state.camera.position.lerp(targetCameraPosition, 0.1);
-
 			state.camera.lookAt(stableTarget.x, 1.1, stableTarget.z);
 		}
 
