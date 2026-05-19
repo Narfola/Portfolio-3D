@@ -42,7 +42,7 @@ export function SkillsSign() {
 				maxWidth={4.6}
 			>
 				{
-					"WILD CODE SCHOOL (Développeur Web)\n\n• Architecture Front-End (React / TS)\n• Logique & Algorithmie JavaScript\n• Back-End (Node.js / Express)\n• Modélisation de bases de données\n• Versioning Git & Méthode Agile SCRUM"
+					"WILD CODE SCHOOL (Développeur Web)\n\n• Architecture Front-End (React / TS)\n• Logique & Algorithmie JavaScript\n• Back-End (Node.js / Express / MySQL)\n• Modélisation de bases de données\n• Versioning Git & Méthode Agile SCRUM"
 				}
 			</Text>
 
